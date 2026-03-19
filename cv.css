@@ -1,0 +1,52 @@
+:root {
+    --transition-fast: 0.2s ease-in-out;
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-foto{
+    width: 30px;
+    height: 30px;
+}
+
+.item-experiencia {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: var(--shadow-soft);
+}
+
+.item-experiencia:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+header {
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 2px solid #007bff;
+}
+
+h2 {
+    color: #007bff;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+/* Estilo para las etiquetas de habilidades */
+.tags span {
+    background: #007bff;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Efecto simple al pasar el ratón */
+.tags span:hover {
+    background: #0056b3;
+    transform: scale(1.1);
+    transition: 0.3s;
+}
