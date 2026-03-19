@@ -1,13 +1,69 @@
 :root {
-    --transition-fast: 0.2s ease-in-out;
-    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.2);
+  --font-size: 40px;
+  --line-height: calc(var(--font-size) * 1.4); /* Un poco más de espacio para los caracteres chinos */
+  --color-text: #2c5f78;
+  --anim-speed: 6s; /* Tiempo total del ciclo */
 }
 
-.profile-foto{
-    width: 30px;
-    height: 30px;
+
+
+.name {
+  height: var(--line-height);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.name ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* Animación: 6 segundos, suave, infinita */
+  animation: slide-two-names var(--anim-speed) cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.name ul li {
+  height: var(--line-height);
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  color: var(--color-text);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+/* --- LA NUEVA ANIMACIÓN FLUIDA --- */
+/* La clave es mover la lista en incrementos exactos del 100% / num_items */
+@keyframes slide-two-names {
+  /* Muestra: Chentoni Hong */
+  0%, 45% {
+    transform: translateY(0);
+  }
+  
+  /* Muestra: 洪晨昊 */
+  50%, 95% {
+    transform: translateY(-33.33%);
+  }
+  
+  /* Vuelve al inicio (Chentoni) suavemente */
+  100% {
+    transform: translateY(-66.66%);
+  }
+}
+
+#perfil{
+    width: 125px;
+	padding: 5px;
+	border-radius: 2px;
+	margin: auto;
+}
+
+h2 {
+    font-family: monospace;
+    font-size: 24px;
+    color: #2c5f78; /* Color azul petróleo del prototipo */
+    text-transform: uppercase;
+    border-bottom: 1px solid #ddd;
+    display: inline-block; /* Para que el cursor de TypeIt esté pegado al texto */
 }
 
 .item-experiencia {
