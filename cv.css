@@ -1,13 +1,13 @@
 /* --- VARIABLES DE DISEÑO --- */
 :root {
-  --color-primary: #142d64; /* Azul oscuro para texto principal */
-  --color-secondary: #2c5f78; /* Azul petróleo para títulos y acentos */
-  --color-accent: #007bff; /* Azul brillante para fondos de etiquetas */
-  --color-accent-hover: #0056b3; /* Azul más oscuro para hover */
-  --color-bg: #f4f7f9; /* Color de fondo suave */
+  --color-primary: #142d64;
+  --color-secondary: #2c5f78;
+  --color-accent: #007bff;
+  --color-accent-hover: #0056b3;
+  --color-bg: #f4f7f9;
   --color-text-body: #4a4a4a;
   
-  --font-family-title: "Montserrat", sans-serif;
+  --font-family-title: "Montserrat", sans-serif; /* Asegúrate de importar esto en HTML si lo usas */
   --font-family-body: "Open Sans", sans-serif;
   
   --font-size-name: 40px;
@@ -19,9 +19,9 @@
   --transition-fast: 0.3s ease;
 }
 
-/* --- ESTILOS GENERALES --- */
+/* --- ESTILOS BASE --- */
 body {
-    font-family: var(--font-family-body);
+    font-family: var(--font-family-body), sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text-body);
     margin: 0;
@@ -29,7 +29,7 @@ body {
 }
 
 .cv-wrapper {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     background: #fff;
     border-radius: 8px;
@@ -37,11 +37,11 @@ body {
     overflow: hidden;
 }
 
-/* --- CABECERA Y ANIMACIÓN DEL NOMBRE --- */
+/* --- CABECERA Y ANIMACIÓN --- */
 .name-header {
     background: var(--color-primary);
     color: #fff;
-    padding: 40px;
+    padding: 30px;
     text-align: center;
 }
 
@@ -49,7 +49,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 #perfil {
@@ -57,8 +57,8 @@ body {
     height: 120px;
     border-radius: 50%;
     border: 4px solid #fff;
-    box-shadow: var(--shadow-soft);
     object-fit: cover;
+    margin-bottom: 10px;
 }
 
 .name-animation {
@@ -86,102 +86,64 @@ body {
   100% { transform: translateY(-66.66%); }
 }
 
-/* --- CONTENEDOR PRINCIPAL CON GRID --- */
+/* --- ESTRUCTURA PRINCIPAL --- */
 .main-container {
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 300px 1fr;
 }
 
-/* --- ESTILOS COMPARTIDOS SECCIONES --- */
 h2 {
     font-family: var(--font-family-title);
-    font-size: 20px;
+    font-size: 18px;
     color: var(--color-secondary);
     text-transform: uppercase;
     border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-/* --- COLUMNA IZQUIERDA (SIDEBAR) --- */
 .sidebar {
     background-color: #fafafa;
-    padding: 40px;
+    padding: 30px;
     border-right: 1px solid #eee;
 }
 
-.sidebar section {
-    margin-bottom: 40px;
-}
-
-.contact-info ul, .aptitudes ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.contact-info li, .aptitudes li {
-    margin-bottom: 15px;
-    font-size: 0.95em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.language-item {
-    margin-bottom: 15px;
-}
-.language-item p { margin: 2px 0; }
-
-/* --- COLUMNA DERECHA (MAIN) --- */
 .main-content {
-    padding: 40px;
+    padding: 30px;
 }
 
-.main-content section {
-    margin-bottom: 40px;
-}
-
-.personal-summary p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: var(--color-primary);
+/* --- TARJETAS Y ENLACES --- */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    margin-bottom: 25px;
 }
 
 .item-experiencia {
     display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-    padding: 15px;
+    gap: 15px;
+    padding: 10px;
     border-radius: 4px;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: all var(--transition-fast);
+    cursor: pointer;
 }
 
-.item-experiencia:hover {
+.card-link:hover .item-experiencia {
     transform: translateY(-3px);
     box-shadow: var(--shadow-hover);
-    background-color: #fcfcfc;
+    background-color: #fdfdfd;
 }
 
 .date {
-    flex: 0 0 130px;
-    color: #888;
-    font-size: 0.9em;
+    flex: 0 0 120px;
+    color: #777;
+    font-size: 0.85em;
     font-weight: bold;
-    padding-top: 3px;
 }
 
-.degree { margin-top: 0; margin-bottom: 5px; font-size: 1.1em; }
-.institution { color: var(--color-secondary); margin: 0; font-weight: bold;}
-.description { margin-top: 10px; margin-bottom: 10px; font-size: 0.95em; }
-
-.main-content ul {
-    font-size: 0.95em;
-    padding-left: 20px;
-}
-
-/* --- ETIQUETAS HABILIDADES (TAGS) --- */
+/* --- TAGS (HABILIDADES) --- */
 .tags {
     margin-top: 10px;
 }
@@ -189,43 +151,111 @@ h2 {
 .tags span {
     background: var(--color-accent);
     color: white;
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 20px;
-    font-size: 0.85em;
-    margin-right: 8px;
+    font-size: 0.8em;
+    margin-right: 5px;
     margin-bottom: 8px;
     display: inline-block;
-    transition: background-color var(--transition-fast);
 }
 
-.tags span:hover {
-    background: var(--color-accent-hover);
+/* --- BOTÓN PDF (OCULTO AL IMPRIMIR) --- */
+.btn-pdf {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 20px;
+    display: inline-block;
 }
 
-.links a {
-    color: var(--color-accent);
-    text-decoration: none;
-}
-.links a:hover { text-decoration: underline; }
-
-/* --- RESPONSIVE DESIGN --- */
-@media (max-width: 850px) {
-    .main-container {
-        grid-template-columns: 1fr;
+@media print {
+    /* 1. Forzar colores y eliminar márgenes del papel */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
-    
-    .sidebar {
-        border-right: none;
-        border-bottom: 1px solid #eee;
+
+    @page {
+        margin: 0; /* Eliminamos el margen físico del papel */
+        size: A4;
     }
-    
-    .item-experiencia {
+
+    body {
+        padding: 0;
+        margin: 0;
+        background: white;
+        font-size: 12px; /* Reducimos ligeramente la fuente general */
+    }
+
+    /* 2. Ajustar el contenedor principal */
+    .cv-wrapper {
+        max-width: 100%;
+        width: 100%;
+        height: 100vh; /* Forzamos que la altura sea exactamente la de la pantalla/página */
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        display: flex;
         flex-direction: column;
-        gap: 5px;
     }
-    
-    .date {
-        flex: none;
-        margin-bottom: 5px;
+
+    .main-container {
+        display: grid !important;
+        grid-template-columns: 240px 1fr !important; /* Estrechamos el sidebar */
+        flex-grow: 1;
+    }
+
+    /* 3. Reducir espacios internos (Paddings) */
+    .name-header {
+        padding: 15px !important; /* Mucho más compacto */
+    }
+
+    #perfil {
+        width: 80px !important; /* Foto más pequeña */
+        height: 80px !important;
+    }
+
+    .sidebar, .main-content {
+        padding: 15px 20px !important; /* Menos espacio desperdiciado */
+    }
+
+    h2 {
+        margin-top: 10px !important;
+        margin-bottom: 8px !important;
+        font-size: 14px !important;
+    }
+
+    .item-experiencia {
+        margin-bottom: 5px !important;
+        padding: 5px !important;
+    }
+
+    /* 4. Control de elementos que ocupan mucho espacio */
+    .tags span {
+        padding: 2px 8px !important;
+        margin-bottom: 4px !important;
+        font-size: 10px !important;
+    }
+
+    /* 5. Congelar animación del nombre */
+    .name-animation {
+        height: auto !important;
+    }
+    .name-animation ul {
+        animation: none !important;
+        transform: none !important;
+    }
+    .name-animation ul li:nth-child(2),
+    .name-animation ul li:nth-child(3) {
+        display: none !important;
+    }
+
+    /* Ocultar botón PDF */
+    .no-print, .btn-pdf {
+        display: none !important;
     }
 }
