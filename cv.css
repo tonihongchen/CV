@@ -1,7 +1,7 @@
 :root {
   --font-size: 40px;
   --line-height: calc(var(--font-size) * 1.4); /* Un poco más de espacio para los caracteres chinos */
-  --color-text: #2c5f78;
+  --color-text: #142d64;
   --anim-speed: 6s; /* Tiempo total del ciclo */
 }
 
