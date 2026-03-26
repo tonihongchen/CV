@@ -1,108 +1,231 @@
+/* --- VARIABLES DE DISEÑO --- */
 :root {
-  --font-size: 40px;
-  --line-height: calc(var(--font-size) * 1.4); /* Un poco más de espacio para los caracteres chinos */
-  --color-text: #142d64;
-  --anim-speed: 6s; /* Tiempo total del ciclo */
-}
-
-
-
-.name {
-  height: var(--line-height);
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.name ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  /* Animación: 6 segundos, suave, infinita */
-  animation: slide-two-names var(--anim-speed) cubic-bezier(0.65, 0, 0.35, 1) infinite;
-}
-
-.name ul li {
-  height: var(--line-height);
-  line-height: var(--line-height);
-  font-size: var(--font-size);
-  color: var(--color-text);
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-/* --- LA NUEVA ANIMACIÓN FLUIDA --- */
-/* La clave es mover la lista en incrementos exactos del 100% / num_items */
-@keyframes slide-two-names {
-  /* Muestra: Chentoni Hong */
-  0%, 45% {
-    transform: translateY(0);
-  }
+  --color-primary: #142d64; /* Azul oscuro para texto principal */
+  --color-secondary: #2c5f78; /* Azul petróleo para títulos y acentos */
+  --color-accent: #007bff; /* Azul brillante para fondos de etiquetas */
+  --color-accent-hover: #0056b3; /* Azul más oscuro para hover */
+  --color-bg: #f4f7f9; /* Color de fondo suave */
+  --color-text-body: #4a4a4a;
   
-  /* Muestra: 洪晨昊 */
-  50%, 95% {
-    transform: translateY(-33.33%);
-  }
+  --font-family-title: "Montserrat", sans-serif;
+  --font-family-body: "Open Sans", sans-serif;
   
-  /* Vuelve al inicio (Chentoni) suavemente */
-  100% {
-    transform: translateY(-66.66%);
-  }
+  --font-size-name: 40px;
+  --line-height-name: calc(var(--font-size-name) * 1.4);
+  --anim-speed-name: 6s;
+  
+  --shadow-soft: 0 2px 10px rgba(0,0,0,0.05);
+  --shadow-hover: 0 5px 20px rgba(0,0,0,0.1);
+  --transition-fast: 0.3s ease;
 }
 
-#perfil{
-    width: 125px;
-	padding: 5px;
-	border-radius: 2px;
-	margin: auto;
+/* --- ESTILOS GENERALES --- */
+body {
+    font-family: var(--font-family-body);
+    background-color: var(--color-bg);
+    color: var(--color-text-body);
+    margin: 0;
+    padding: 20px;
 }
 
+.cv-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+}
+
+/* --- CABECERA Y ANIMACIÓN DEL NOMBRE --- */
+.name-header {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 40px;
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#perfil {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: var(--shadow-soft);
+    object-fit: cover;
+}
+
+.name-animation {
+    height: var(--line-height-name);
+    overflow: hidden;
+}
+
+.name-animation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    animation: slide-names var(--anim-speed-name) cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.name-animation ul li {
+    height: var(--line-height-name);
+    line-height: var(--line-height-name);
+    font-size: var(--font-size-name);
+    font-weight: bold;
+}
+
+@keyframes slide-names {
+  0%, 45% { transform: translateY(0); }
+  50%, 95% { transform: translateY(-33.33%); }
+  100% { transform: translateY(-66.66%); }
+}
+
+/* --- CONTENEDOR PRINCIPAL CON GRID --- */
+.main-container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+}
+
+/* --- ESTILOS COMPARTIDOS SECCIONES --- */
 h2 {
-    font-family: monospace;
-    font-size: 24px;
-    color: #2c5f78; /* Color azul petróleo del prototipo */
+    font-family: var(--font-family-title);
+    font-size: 20px;
+    color: var(--color-secondary);
     text-transform: uppercase;
-    border-bottom: 1px solid #ddd;
-    display: inline-block; /* Para que el cursor de TypeIt esté pegado al texto */
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* --- COLUMNA IZQUIERDA (SIDEBAR) --- */
+.sidebar {
+    background-color: #fafafa;
+    padding: 40px;
+    border-right: 1px solid #eee;
+}
+
+.sidebar section {
+    margin-bottom: 40px;
+}
+
+.contact-info ul, .aptitudes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-info li, .aptitudes li {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-item {
+    margin-bottom: 15px;
+}
+.language-item p { margin: 2px 0; }
+
+/* --- COLUMNA DERECHA (MAIN) --- */
+.main-content {
+    padding: 40px;
+}
+
+.main-content section {
+    margin-bottom: 40px;
+}
+
+.personal-summary p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--color-primary);
 }
 
 .item-experiencia {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 4px;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    box-shadow: var(--shadow-soft);
 }
 
 .item-experiencia:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-hover);
-}
-header {
-    text-align: center;
-    padding: 40px 0;
-    border-bottom: 2px solid #007bff;
+    background-color: #fcfcfc;
 }
 
-h2 {
-    color: #007bff;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    margin-top: 30px;
-}
-
-/* Estilo para las etiquetas de habilidades */
-.tags span {
-    background: #007bff;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
+.date {
+    flex: 0 0 130px;
+    color: #888;
     font-size: 0.9em;
-    margin-right: 5px;
-    display: inline-block;
-    margin-bottom: 10px;
+    font-weight: bold;
+    padding-top: 3px;
 }
 
-/* Efecto simple al pasar el ratón */
+.degree { margin-top: 0; margin-bottom: 5px; font-size: 1.1em; }
+.institution { color: var(--color-secondary); margin: 0; font-weight: bold;}
+.description { margin-top: 10px; margin-bottom: 10px; font-size: 0.95em; }
+
+.main-content ul {
+    font-size: 0.95em;
+    padding-left: 20px;
+}
+
+/* --- ETIQUETAS HABILIDADES (TAGS) --- */
+.tags {
+    margin-top: 10px;
+}
+
+.tags span {
+    background: var(--color-accent);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    transition: background-color var(--transition-fast);
+}
+
 .tags span:hover {
-    background: #0056b3;
-    transform: scale(1.1);
-    transition: 0.3s;
+    background: var(--color-accent-hover);
+}
+
+.links a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+.links a:hover { text-decoration: underline; }
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 850px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .item-experiencia {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .date {
+        flex: none;
+        margin-bottom: 5px;
+    }
 }
