@@ -1,25 +1,24 @@
-/* --- VARIABLES DE DISEÑO --- */
 :root {
   --color-primary: #142d64;
   --color-secondary: #2c5f78;
-  --color-accent: #007bff;
-  --color-accent-hover: #0056b3;
+  --color-accent: #0056b3;
+  --color-accent-hover: #004494;
   --color-bg: #f4f7f9;
   --color-text-body: #4a4a4a;
-  
-  --font-family-title: "Montserrat", sans-serif; /* Asegúrate de importar esto en HTML si lo usas */
+  --color-date: #595959;
+
+  --font-family-title: "Montserrat", sans-serif;
   --font-family-body: "Open Sans", sans-serif;
-  
+
   --font-size-name: 40px;
   --line-height-name: calc(var(--font-size-name) * 1.4);
   --anim-speed-name: 6s;
-  
+
   --shadow-soft: 0 2px 10px rgba(0,0,0,0.05);
   --shadow-hover: 0 5px 20px rgba(0,0,0,0.1);
   --transition-fast: 0.3s ease;
 }
 
-/* --- ESTILOS BASE --- */
 body {
     font-family: var(--font-family-body), sans-serif;
     background-color: var(--color-bg);
@@ -64,6 +63,7 @@ body {
 .name-animation {
     height: var(--line-height-name);
     overflow: hidden;
+    max-width: 100%;
 }
 
 .name-animation ul {
@@ -78,6 +78,8 @@ body {
     line-height: var(--line-height-name);
     font-size: var(--font-size-name);
     font-weight: bold;
+    font-family: var(--font-family-title);
+    white-space: nowrap;
 }
 
 @keyframes slide-names {
@@ -109,12 +111,33 @@ h2 {
     border-right: 1px solid #eee;
 }
 
+.sidebar section + section {
+    margin-top: 28px;
+}
+
 .main-content {
     padding: 30px;
 }
 
+/* --- CONTACTO --- */
+.contact-info ul {
+    padding-left: 20px;
+}
+
+.contact-info a {
+    color: inherit;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.contact-info a:hover,
+.contact-info a:focus-visible {
+    text-decoration: underline;
+}
+
 /* --- TARJETAS Y ENLACES --- */
-.card-link {
+.card-link,
+.item-block {
     text-decoration: none;
     color: inherit;
     display: block;
@@ -126,7 +149,10 @@ h2 {
     gap: 15px;
     padding: 10px;
     border-radius: 4px;
-    transition: all var(--transition-fast);
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.card-link .item-experiencia {
     cursor: pointer;
 }
 
@@ -138,14 +164,27 @@ h2 {
 
 .date {
     flex: 0 0 120px;
-    color: #777;
+    color: var(--color-date);
     font-size: 0.85em;
     font-weight: bold;
+}
+
+.details p {
+    margin: 0 0 6px;
+}
+
+.details ul {
+    margin: 6px 0 0;
+    padding-left: 20px;
 }
 
 /* --- TAGS (HABILIDADES) --- */
 .tags {
     margin-top: 10px;
+}
+
+.technical-skills .tags {
+    margin-top: 0;
 }
 
 .tags span {
@@ -159,7 +198,22 @@ h2 {
     display: inline-block;
 }
 
+/* --- ENLACES DE PORTAFOLIO --- */
+.links a {
+    color: var(--color-accent);
+}
+
+.links a:hover,
+.links a:focus-visible {
+    color: var(--color-accent-hover);
+}
+
 /* --- BOTÓN PDF (OCULTO AL IMPRIMIR) --- */
+.no-print {
+    text-align: right;
+    padding: 10px;
+}
+
 .btn-pdf {
     background-color: var(--color-secondary);
     color: white;
@@ -172,15 +226,100 @@ h2 {
     display: inline-block;
 }
 
+.btn-pdf:hover,
+.btn-pdf:focus-visible {
+    background-color: var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .name-animation {
+        height: auto;
+    }
+
+    .name-animation ul {
+        animation: none;
+        transform: none;
+    }
+
+    .name-animation ul li:nth-child(2),
+    .name-animation ul li:nth-child(3) {
+        display: none;
+    }
+
+    .item-experiencia,
+    .card-link:hover .item-experiencia {
+        transition: none;
+        transform: none;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .cv-wrapper {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .name-header {
+        padding: 24px 16px;
+    }
+
+    :root {
+        --font-size-name: 26px;
+    }
+
+    .name-animation {
+        width: 100%;
+    }
+
+    .name-animation ul li {
+        white-space: nowrap;
+    }
+
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 24px 20px;
+    }
+
+    .main-content {
+        padding: 24px 20px;
+    }
+
+    .item-experiencia {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .date {
+        flex: none;
+    }
+
+    .no-print {
+        text-align: center;
+        padding: 0 0 10px;
+    }
+
+    .btn-pdf {
+        margin: 10px 0 20px;
+    }
+}
+
 @media print {
-    /* 1. Forzar colores y eliminar márgenes del papel */
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
     @page {
-        margin: 0; /* Eliminamos el margen físico del papel */
+        margin: 0;
         size: A4;
     }
 
@@ -188,39 +327,42 @@ h2 {
         padding: 0;
         margin: 0;
         background: white;
-        font-size: 12px; /* Reducimos ligeramente la fuente general */
+        font-size: 12px;
     }
 
-    /* 2. Ajustar el contenedor principal */
     .cv-wrapper {
         max-width: 100%;
         width: 100%;
-        height: 100vh; /* Forzamos que la altura sea exactamente la de la pantalla/página */
         margin: 0;
         border: none;
         box-shadow: none;
         display: flex;
         flex-direction: column;
+        border-radius: 0;
     }
 
     .main-container {
         display: grid !important;
-        grid-template-columns: 240px 1fr !important; /* Estrechamos el sidebar */
+        grid-template-columns: 240px 1fr !important;
         flex-grow: 1;
     }
 
-    /* 3. Reducir espacios internos (Paddings) */
     .name-header {
-        padding: 15px !important; /* Mucho más compacto */
+        padding: 15px !important;
     }
 
     #perfil {
-        width: 80px !important; /* Foto más pequeña */
+        width: 80px !important;
         height: 80px !important;
     }
 
     .sidebar, .main-content {
-        padding: 15px 20px !important; /* Menos espacio desperdiciado */
+        padding: 15px 20px !important;
+    }
+
+    .sidebar {
+        border-right: 1px solid #eee !important;
+        border-bottom: none !important;
     }
 
     h2 {
@@ -229,19 +371,23 @@ h2 {
         font-size: 14px !important;
     }
 
+    .sidebar section + section {
+        margin-top: 14px;
+    }
+
     .item-experiencia {
         margin-bottom: 5px !important;
         padding: 5px !important;
+        flex-direction: row;
+        gap: 15px;
     }
 
-    /* 4. Control de elementos que ocupan mucho espacio */
     .tags span {
         padding: 2px 8px !important;
         margin-bottom: 4px !important;
         font-size: 10px !important;
     }
 
-    /* 5. Congelar animación del nombre */
     .name-animation {
         height: auto !important;
     }
@@ -254,7 +400,10 @@ h2 {
         display: none !important;
     }
 
-    /* Ocultar botón PDF */
+    :root {
+        --font-size-name: 28px;
+    }
+
     .no-print, .btn-pdf {
         display: none !important;
     }
